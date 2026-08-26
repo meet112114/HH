@@ -25,20 +25,40 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 });
 
+const FORM_ENDPOINT = 'https://formspree.io/f/xkjnwwka';
+
 // Contact Form Handler
 function handleContactSubmit(e) {
   e.preventDefault();
-  
+
   const form = document.getElementById('contactForm');
   const successBox = document.getElementById('contactSuccessMsg');
-  const name = document.getElementById('contactName')?.value || 'Friend';
 
-  if (form && successBox) {
-    form.classList.add('hidden');
-    successBox.classList.remove('hidden');
+  if (!form || !successBox) return;
 
-    showToast(`Thank you, ${name}! Your message has been sent to Helping Hands. 🌱`);
-  }
+  const name = document.getElementById('contactName')?.value?.trim() || 'Friend';
+
+  fetch(FORM_ENDPOINT, {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json'
+    },
+    body: new FormData(form)
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Submission failed');
+      }
+      return response.json();
+    })
+    .then(() => {
+      form.classList.add('hidden');
+      successBox.classList.remove('hidden');
+      showToast(`Thank you, ${name}! Your message has been sent to Helping Hands. 🌱`);
+    })
+    .catch(() => {
+      showToast('There was a problem sending your message. Please configure your Formspree form endpoint and retry.');
+    });
 }
 
 // Toast Helper
