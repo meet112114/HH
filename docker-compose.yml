@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  helping-hands-web:
+    build: .
+    container_name: helping_hands_site
+    restart: unless-stopped
+    ports:
+      - "8085:80"   # Maps host port 8085 to container port 80
+    environment:
+      - TZ=Asia/Kolkata
