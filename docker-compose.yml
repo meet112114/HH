@@ -7,5 +7,7 @@ services:
     restart: unless-stopped
     ports:
       - "8085:80"   # Maps host port 8085 to container port 80
+    volumes:
+      - ./versova-drive01:/usr/share/nginx/html/versova-drive01
     environment:
       - TZ=Asia/Kolkata

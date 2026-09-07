@@ -372,107 +372,356 @@ h1, h2, h3, h4 {
 }
 
 .drive-section {
-  padding: 10px 0 30px;
+  padding: 18px 0 76px;
 }
 
-.drive-banner {
-  background: linear-gradient(135deg, rgba(45, 106, 79, 0.96) 0%, rgba(230, 111, 81, 0.88) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 30px;
-  padding: 26px 28px;
-  box-shadow: 0 18px 40px rgba(30, 41, 59, 0.15);
+.drive-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+  min-height: 540px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
 }
 
 .drive-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #FFFFFF;
-  font-size: 0.8rem;
+  background: var(--primary-light);
+  border: 1px solid rgba(45, 106, 79, 0.12);
+  color: var(--primary);
+  font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   border-radius: 999px;
   padding: 8px 14px;
-  margin-bottom: 18px;
+  margin-bottom: 22px;
 }
 
-.drive-content {
+.drive-main-media {
+  height: 540px;
+  position: relative;
+  background: #E8F0E8;
   display: flex;
-  align-items: center;
-  gap: 22px;
-}
-
-.drive-date-block {
-  min-width: 120px;
-  height: 120px;
-  border-radius: 22px;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: #FFFFFF;
 }
 
-.drive-day {
+.drive-main-image {
   display: block;
-  font-size: 2.4rem;
-  line-height: 1;
-  font-weight: 800;
-  font-family: var(--font-heading);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
-.drive-month {
-  display: block;
-  font-size: 0.84rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-top: 8px;
-  opacity: 0.9;
-}
-
-.drive-info {
-  flex: 1;
+.drive-image-label {
+  position: absolute;
+  left: 22px;
+  bottom: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 13px;
   color: #FFFFFF;
-}
-
-.drive-info h2 {
-  color: #FFFFFF;
-  font-size: clamp(1.8rem, 3vw, 2.6rem);
-  margin-bottom: 10px;
-}
-
-.drive-location,
-.drive-time {
-  font-size: 1rem;
+  background: rgba(27, 67, 50, 0.82);
+  backdrop-filter: blur(8px);
+  font-size: 0.78rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.95);
-  margin-bottom: 6px;
 }
 
-.drive-note {
-  margin-top: 10px;
-  font-size: 0.96rem;
-  line-height: 1.6;
-  max-width: 640px;
-  color: rgba(255, 255, 255, 0.9);
+.drive-image-label span {
+  color: var(--accent-amber);
+  font-family: var(--font-heading);
+  font-weight: 800;
 }
 
-.drive-banner .btn {
-  margin-top: 18px;
-  background: #FFFFFF;
+.drive-story {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 54px 48px;
+  background: linear-gradient(160deg, #FFFFFF 0%, #F5FAF6 100%);
+}
+
+.drive-kicker {
+  color: var(--accent-coral);
+  font-size: 0.76rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.drive-story h2 {
+  max-width: 390px;
+  font-size: clamp(2.3rem, 4vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  margin-bottom: 20px;
+}
+
+.drive-lead {
+  max-width: 390px;
+  color: var(--text-muted);
+  font-size: 1.02rem;
+  line-height: 1.7;
+  margin-bottom: 28px;
+}
+
+.drive-facts {
+  display: flex;
+  gap: 0;
+  width: 100%;
+  max-width: 390px;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 30px;
+  padding: 16px 0;
+}
+
+.drive-facts div {
+  display: flex;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  border-right: 1px solid var(--border-color);
+  padding-left: 14px;
+}
+
+.drive-facts div:first-child {
+  padding-left: 0;
+}
+
+.drive-facts div:last-child {
+  border-right: 0;
+}
+
+.drive-facts strong {
   color: var(--primary);
-  box-shadow: none;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
 }
 
-.drive-banner .btn:hover {
-  background: #F8FAFC;
-  transform: translateY(-2px);
+.drive-facts span {
+  color: var(--text-subtle);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.drive-story .btn svg,
+.gallery-button svg {
+  width: 16px;
+  height: 16px;
+}
+
+.drive-gallery {
+  padding-top: 66px;
+}
+
+.gallery-heading,
+.drive-reflection {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.gallery-heading {
+  margin-bottom: 22px;
+}
+
+.gallery-heading h3,
+.drive-reflection h3 {
+  font-size: clamp(1.65rem, 3vw, 2.25rem);
+  letter-spacing: -0.03em;
+}
+
+.gallery-stage {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 760px) 42px;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 4vw, 48px);
+}
+
+.gallery-controls {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.gallery-button {
+  width: 42px;
+  height: 42px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--primary);
+  border: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.gallery-button:hover {
+  color: #FFFFFF;
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.gallery-track {
+  display: flex;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  scrollbar-width: none;
+}
+
+.gallery-track::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-slide {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #D8E7DA;
+}
+
+.gallery-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  opacity: 0;
+  transform: scale(1.015);
+  transition: opacity 0.35s ease, transform 0.45s ease;
+}
+
+.gallery-image.is-active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.gallery-slide figcaption {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  color: #FFFFFF;
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.drive-reflection {
+  align-items: center;
+  margin-top: 72px;
+  padding: 30px 0 0;
+  border-top: 1px solid var(--border-color);
+}
+
+.drive-reflection > div {
+  flex: 0 0 42%;
+}
+
+.drive-reflection > p {
+  max-width: 510px;
+  color: var(--text-muted);
+  font-size: 0.96rem;
+  line-height: 1.75;
+}
+
+/* Team Section */
+.team-section {
+  padding: 28px 0 72px;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  column-gap: 54px;
+  row-gap: 56px;
+}
+
+.team-card {
+  text-align: center;
+}
+
+.team-avatar {
+  width: 150px;
+  height: 150px;
+  display: block;
+  margin: 0 auto 16px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--primary-light);
+  background: #E8F0E8;
+}
+
+.team-avatar-frame {
+  width: 150px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 16px;
+  overflow: hidden;
+  border: 4px solid #E5E7EB;
+  border-radius: 50%;
+  background: #F3F4F6;
+}
+
+.team-avatar-frame .team-avatar {
+  margin: 0;
+  border: 0;
+}
+
+.team-avatar-frame.is-placeholder {
+  position: relative;
+  background: #E5E7EB;
+}
+
+.team-avatar-frame.is-placeholder::before {
+  content: '';
+  position: absolute;
+  top: 31px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #9CA3AF;
+}
+
+.team-avatar-frame.is-placeholder::after {
+  content: '';
+  position: absolute;
+  bottom: -7px;
+  width: 104px;
+  height: 78px;
+  border-radius: 50% 50% 0 0;
+  background: #9CA3AF;
+}
+
+.team-card h3 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.team-card p {
+  color: var(--text-muted);
+  font-size: 0.78rem;
 }
 
 /* About Section */
@@ -929,6 +1178,14 @@ h1, h2, h3, h4 {
 
 /* Responsive */
 @media (max-width: 992px) {
+  .drive-feature {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .drive-story {
+    padding: 40px 30px;
+  }
+
   .mission-grid {
     grid-template-columns: 1fr;
   }
@@ -938,12 +1195,36 @@ h1, h2, h3, h4 {
   .benefits-grid {
     grid-template-columns: 1fr 1fr;
   }
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+  }
   .contact-card-grid {
     grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
+  .site-header {
+    padding: 10px 0;
+  }
+
+  .brand-img {
+    width: 44px;
+    height: 44px;
+  }
+
+  .brand-title {
+    font-size: 1.12rem;
+  }
+
+  .brand-tag {
+    font-size: 0.68rem;
+  }
+
+  .nav-actions .btn {
+    display: none;
+  }
+
   .nav-menu {
     display: none;
     position: absolute;
@@ -952,13 +1233,25 @@ h1, h2, h3, h4 {
     right: 0;
     background: #FFFFFF;
     flex-direction: column;
-    padding: 20px;
+    gap: 0;
+    padding: 10px 24px 16px;
     box-shadow: var(--shadow-lg);
     border-bottom: 1px solid var(--border-color);
   }
 
   .nav-menu.active {
     display: flex;
+  }
+
+  .nav-link {
+    width: 100%;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--border-subtle);
+    font-size: 0.94rem;
+  }
+
+  .nav-link:last-child {
+    border-bottom: 0;
   }
 
   .menu-toggle {
@@ -969,12 +1262,64 @@ h1, h2, h3, h4 {
     font-size: 2.3rem;
   }
 
+  .drive-section {
+    padding-top: 8px;
+  }
+
+  .drive-feature {
+    display: block;
+  }
+
+  .drive-main-media,
+  .drive-main-image {
+    height: 360px;
+  }
+
+  .drive-story {
+    padding: 34px 24px 38px;
+  }
+
+  .drive-story h2 {
+    font-size: 2.45rem;
+  }
+
+  .gallery-heading,
+  .drive-reflection {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .gallery-stage {
+    grid-template-columns: 36px minmax(0, 1fr) 36px;
+    gap: 10px;
+  }
+
+  .drive-reflection {
+    gap: 18px;
+  }
+
+  .drive-reflection > div {
+    flex-basis: auto;
+  }
+
   .activities-grid {
     grid-template-columns: 1fr;
   }
 
   .benefits-grid {
     grid-template-columns: 1fr;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr 1fr;
+    column-gap: 28px;
+    row-gap: 42px;
+  }
+
+  .team-avatar,
+  .team-avatar-frame {
+    width: 130px;
+    height: 130px;
   }
 
   .form-row {
