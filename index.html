@@ -139,6 +139,44 @@
         </div>
         <p>From gathering litter to sorting what we collected, the drive turned a few hours of effort into a shared reminder that our public spaces belong to all of us. Every student brought energy, patience, and a willingness to do the work together.</p>
       </div>
+
+      <!-- Certificate Search Section -->
+      <div class="drive-certificates">
+        <div class="section-header">
+          <div class="section-tag-badge">🏆 Certificates</div>
+          <h2 class="section-title">Download <span class="gradient-text">E-Certificates</span></h2>
+          <p class="section-subtitle">Search for your participation certificate by name</p>
+        </div>
+
+        <!-- Drive Info -->
+        <div class="certificate-drive-info">
+          <div class="drive-info-badge">Versova Beach Clean-up Drive</div>
+          <div class="drive-info-details">
+            <div class="drive-info-item">
+              <i data-lucide="calendar"></i>
+              <span>Versova Drive 01</span>
+            </div>
+            <div class="drive-info-item">
+              <i data-lucide="map-pin"></i>
+              <span>Versova Beach, Mumbai</span>
+            </div>
+            <div class="drive-info-item">
+              <i data-lucide="users"></i>
+              <span>06 September 2026</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="certificate-search-container">
+          <div class="certificate-search-form">
+            <input type="text" id="certificateSearchInput" placeholder="Enter your name (e.g., John Doe)" class="certificate-search-input">
+            <button id="certificateSearchBtn" class="btn btn-primary">
+              <i data-lucide="search"></i> Search Certificate
+            </button>
+          </div>
+          <div id="certificateResults" class="certificate-results"></div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -337,6 +375,19 @@
 
   <!-- Toast Notification -->
   <div class="toast-box" id="toastBox"></div>
+
+  <!-- Certificate Result Template -->
+  <template id="certificateResultTemplate">
+    <div class="certificate-result-item">
+      <div class="certificate-result-info">
+        <h5 class="certificate-result-name"></h5>
+        <p class="certificate-result-text">Certificate found!</p>
+      </div>
+      <a href="" class="btn btn-primary btn-sm certificate-download-btn" download>
+        <i data-lucide="download"></i> Download
+      </a>
+    </div>
+  </template>
 
   <script src="app.js"></script>
 </body>

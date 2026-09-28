@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   discoverDriveImages().then(initializeDriveGallery);
+  initializeCertificateSearch();
 });
 
 const driveImages = {};
@@ -162,4 +163,148 @@ function showToast(message) {
     toast.style.transition = 'opacity 0.3s ease';
     setTimeout(() => toast.remove(), 300);
   }, 4000);
+}
+
+// Certificate Search Functionality
+const certificateDirectory = 'versova-drive01/certificates';
+const certificateFiles = [
+  'AAMIR KHAN.jpg',
+  'AAYUSH PEDNEKAR.jpg',
+  'ABHISHEK CHOUDHARY.jpg',
+  'ABHISHEK PANDEY.jpg',
+  'ADITI CHAUBEY.jpg',
+  'AKHIL SINGH RAJPUT.jpg',
+  'AKSHAY MANORE.jpg',
+  'AMAAN SHAIKH.jpg',
+  'ANISH BHOSALE.jpg',
+  'ANURAG PRAJAPATI.jpg',
+  'BIGNESH RAWAL.jpg',
+  'BINDHYA KARKERA.jpg',
+  'BIPIN GUPTA.jpg',
+  'CHAITANNYA KHOT.jpg',
+  'DEBARGHYA MAJUMDER.jpg',
+  'DEBASISH BEHERA.jpg',
+  'DEEPIKA ARGADE.jpg',
+  'DEVIKA SHARMA.jpg',
+  'DHAIRYA KAMBLE.jpg',
+  'DHRUV BORSE.jpg',
+  'DIYA MANDAL.jpg',
+  'HARSHDEEP SINGH.jpg',
+  'JAYSHREE SINGH.jpg',
+  'JEZIL AWARI.jpg',
+  'JITENDRA SINGH RAJPUT.jpg',
+  'KAUSHAL KUNDEKAR.jpg',
+  'KAUSHIK LOKARE.jpg',
+  'KEVEN SHARON.jpg',
+  'KUSH MODHA.jpg',
+  'LOKESH PATIL.jpg',
+  'MANAN DOSHI.jpg',
+  'MANTHAN VILANKAR.jpg',
+  'MEET SANWAWADKAR.jpg',
+  'MONALI SAWANT.jpg',
+  'PRANAV KAMBLE.jpg',
+  'RHUTVIK KADAM.jpg',
+  'SAHIL DESAI.jpg',
+  'SAHIL PATIL.jpg',
+  'SAI NEWALKAR.jpg',
+  'SAKSHI SONDKAR.jpg',
+  'SANDHESH PANMAND.jpg',
+  'SARASWATI ORAON.jpg',
+  'SHREYA SONAWANE.jpg',
+  'SIDDHARTH KANIM.jpg',
+  'SOHAN CHOUDHARY.jpg',
+  'SURAJ KONDEKAR.jpg',
+  'VAIBHAV SINGH.jpg',
+  'VIGHNESH NAKATE.jpg',
+  'VINIT VERMA.jpg',
+  'YASHRAJ DESHMUKH.jpg'
+];
+
+function initializeCertificateSearch() {
+  const searchInput = document.getElementById('certificateSearchInput');
+  const searchBtn = document.getElementById('certificateSearchBtn');
+  const resultsContainer = document.getElementById('certificateResults');
+
+  if (!searchInput || !searchBtn || !resultsContainer) return;
+
+  // Search on button click
+  searchBtn.addEventListener('click', () => performCertificateSearch());
+
+  // Search on Enter key
+  searchInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+      performCertificateSearch();
+    }
+  });
+
+  // Clear results when input is cleared
+  searchInput.addEventListener('input', () => {
+    if (searchInput.value.trim() === '') {
+      resultsContainer.innerHTML = '';
+    }
+  });
+}
+
+function performCertificateSearch() {
+  const searchInput = document.getElementById('certificateSearchInput');
+  const resultsContainer = document.getElementById('certificateResults');
+
+  if (!searchInput || !resultsContainer) return;
+
+  const searchTerm = searchInput.value.trim();
+  if (!searchTerm) {
+    showToast('Please enter a name to search');
+    return;
+  }
+
+  // Create regex pattern from search term (case insensitive)
+  const regexPattern = searchTerm.split('').join('.*').toUpperCase();
+  const regex = new RegExp(regexPattern);
+
+  // Find matching certificates
+  const matches = certificateFiles.filter(file => {
+    const fileName = file.replace('.jpg', '').toUpperCase();
+    return regex.test(fileName);
+  });
+
+  displayCertificateResults(matches);
+}
+
+function displayCertificateResults(matches) {
+  const resultsContainer = document.getElementById('certificateResults');
+  const template = document.getElementById('certificateResultTemplate');
+
+  if (!resultsContainer || !template) return;
+
+  resultsContainer.innerHTML = '';
+
+  if (matches.length === 0) {
+    resultsContainer.innerHTML = `
+      <div class="certificate-no-results">
+        <p>No certificate found for this name. Try a different spelling or check your name in the participant list.</p>
+      </div>
+    `;
+    return;
+  }
+
+  matches.forEach(fileName => {
+    const clone = template.content.cloneNode(true);
+    const resultItem = clone.querySelector('.certificate-result-item');
+    const nameElement = clone.querySelector('.certificate-result-name');
+    const downloadBtn = clone.querySelector('.certificate-download-btn');
+
+    if (resultItem && nameElement && downloadBtn) {
+      const displayName = fileName.replace('.jpg', '');
+      nameElement.textContent = displayName;
+      downloadBtn.href = `${certificateDirectory}/${encodeURIComponent(fileName)}`;
+      downloadBtn.download = fileName;
+    }
+
+    resultsContainer.appendChild(clone);
+  });
+
+  // Reinitialize Lucide icons for the new elements
+  if (window.lucide) {
+    window.lucide.createIcons();
+  }
 }
