@@ -43,7 +43,8 @@
       </a>
 
       <nav class="nav-menu" id="navMenu">
-        <a href="#completed-drive" class="nav-link">Our Drive</a>
+        <a href="#completed-drive" class="nav-link">Our Drives</a>
+        <a href="#certificates" class="nav-link">Certificates</a>
         <a href="#team" class="nav-link">Our Team</a>
         <a href="#about" class="nav-link">About</a>
         <a href="#activities" class="nav-link">What We Do</a>
@@ -93,21 +94,52 @@
         </a>
       </div>
 
-      <div class="upcoming-drive-card" aria-label="Upcoming drive information">
-        <div class="upcoming-drive-tag">Upcoming Drive</div>
-        <h2>🌊 Helping Hands – Post Ganpati Beach Cleaning Drive 🌱</h2>
-        <div class="upcoming-drive-details">
-          <p><strong>📅 Date:</strong> 3 October 2026</p>
-          <p><strong>⏰ Time:</strong> 8:00 AM</p>
-          <p><strong>📍 Location:</strong> Versova Beach</p>
-        </div>
-      </div>
     </div>
   </section>
 
-  <!-- Completed Drive Feature -->
+  <!-- Completed Drives -->
   <section class="drive-section" id="completed-drive">
     <div class="container">
+      <div class="drive-feature drive-feature-secondary">
+        <div class="drive-main-media">
+          <img src="versova-drive02/slide-images/0.jpeg" alt="Helping Hands volunteers at the second Versova Beach drive" class="drive-main-image">
+          <div class="drive-image-label"><span>02</span> Versova Beach, Mumbai</div>
+        </div>
+
+        <div class="drive-story">
+          <div class="drive-badge">Completed drive · Sunday, 4 October 2026</div>
+          <p class="drive-kicker">Our second shoreline action</p>
+          <h2>Versova Drive <span class="gradient-text">02</span></h2>
+          <p class="drive-lead">Our post-Ganpati clean-up brought 100 students together to care for Versova Beach.</p>
+          <div class="drive-facts">
+            <div><strong>100</strong><span>students</span></div>
+            <div><strong>02</strong><span>drive</span></div>
+            <div><strong>04 Oct</strong><span>2026</span></div>
+          </div>
+          <a href="#drive-gallery-02" class="btn btn-primary">See the drive <i data-lucide="arrow-down"></i></a>
+        </div>
+      </div>
+
+      <div class="drive-gallery" id="drive-gallery-02">
+        <div class="gallery-heading">
+          <div>
+            <p class="drive-kicker">Post-Ganpati clean-up</p>
+            <h3>100 students, one cleaner shore.</h3>
+          </div>
+        </div>
+        <div class="gallery-stage">
+          <button class="gallery-button" id="galleryPrev02" type="button" aria-label="Previous Drive 02 photo"><i data-lucide="arrow-left"></i></button>
+          <div class="gallery-track" id="galleryTrack02" aria-live="polite"></div>
+          <button class="gallery-button" id="galleryNext02" type="button" aria-label="Next Drive 02 photo"><i data-lucide="arrow-right"></i></button>
+        </div>
+      </div>
+
+      <div class="drive-section-heading">
+        <p class="drive-kicker">Earlier this year</p>
+        <h2>Versova Drive <span class="gradient-text">01</span></h2>
+        <p>Our first shoreline action, completed on 6 September 2026 with 50 student volunteers.</p>
+      </div>
+
       <div class="drive-feature">
         <div class="drive-main-media">
           <img src="versova-drive01/main-img.jpeg" alt="Helping Hands volunteers at Versova Beach" class="drive-main-image">
@@ -150,42 +182,28 @@
         <p>From gathering litter to sorting what we collected, the drive turned a few hours of effort into a shared reminder that our public spaces belong to all of us. Every student brought energy, patience, and a willingness to do the work together.</p>
       </div>
 
-      <!-- Certificate Search Section -->
-      <div class="drive-certificates">
-        <div class="section-header">
-          <div class="section-tag-badge">🏆 Certificates</div>
-          <h2 class="section-title">Download <span class="gradient-text">E-Certificates</span></h2>
-          <p class="section-subtitle">Search for your participation certificate by name</p>
-        </div>
+    </div>
+  </section>
 
-        <!-- Drive Info -->
-        <div class="certificate-drive-info">
-          <div class="drive-info-badge">Versova Beach Clean-up Drive</div>
-          <div class="drive-info-details">
-            <div class="drive-info-item">
-              <i data-lucide="calendar"></i>
-              <span>Versova Drive 01</span>
-            </div>
-            <div class="drive-info-item">
-              <i data-lucide="map-pin"></i>
-              <span>Versova Beach, Mumbai</span>
-            </div>
-            <div class="drive-info-item">
-              <i data-lucide="users"></i>
-              <span>06 September 2026</span>
-            </div>
-          </div>
-        </div>
+  <!-- Shared Certificate Search -->
+  <section class="certificates-section" id="certificates">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag-badge">🏆 Volunteer recognition</div>
+        <h2 class="section-title">Find Your <span class="gradient-text">Certificates</span></h2>
+        <p class="section-subtitle">Search your name once to see every certificate available across our completed drives.</p>
+      </div>
 
-        <div class="certificate-search-container">
-          <div class="certificate-search-form">
-            <input type="text" id="certificateSearchInput" placeholder="Enter your name (e.g., John Doe)" class="certificate-search-input">
-            <button id="certificateSearchBtn" class="btn btn-primary">
-              <i data-lucide="search"></i> Search Certificate
-            </button>
-          </div>
-          <div id="certificateResults" class="certificate-results"></div>
+      <div class="certificate-search-container">
+        <div class="certificate-search-form">
+          <label class="sr-only" for="certificateSearchInput">Search certificates by name</label>
+          <input type="search" id="certificateSearchInput" placeholder="Enter your full name" class="certificate-search-input">
+          <button id="certificateSearchBtn" class="btn btn-primary">
+            <i data-lucide="search"></i> Search
+          </button>
         </div>
+        <p class="certificate-search-hint">Available certificates are grouped by drive so you can view or download the right one.</p>
+        <div id="certificateResults" class="certificate-results" aria-live="polite"></div>
       </div>
     </div>
   </section>
@@ -201,7 +219,7 @@
 
       <div class="team-grid">
         <article class="team-card">
-          <img src="team/pass-images/meet.jpg" alt="Meet" class="team-avatar" onerror="this.onerror=null; this.src='ourimgs.jpeg'">
+          <img src="team/pass-images/meet.png" alt="Meet" class="team-avatar" onerror="this.onerror=null; this.src='ourimgs.jpeg'">
           <h3>Meet</h3>
         </article>
         <article class="team-card">
@@ -391,11 +409,16 @@
     <div class="certificate-result-item">
       <div class="certificate-result-info">
         <h5 class="certificate-result-name"></h5>
-        <p class="certificate-result-text">Certificate found!</p>
+        <p class="certificate-result-text"></p>
       </div>
-      <a href="" class="btn btn-primary btn-sm certificate-download-btn" download>
+      <div class="certificate-result-actions">
+        <a href="" class="btn btn-secondary btn-sm certificate-view-btn" target="_blank" rel="noopener noreferrer">
+          <i data-lucide="eye"></i> View
+        </a>
+        <a href="" class="btn btn-primary btn-sm certificate-download-btn" download>
         <i data-lucide="download"></i> Download
-      </a>
+        </a>
+      </div>
     </div>
   </template>
 

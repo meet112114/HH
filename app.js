@@ -24,12 +24,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  discoverDriveImages().then(initializeDriveGallery);
+  discoverDriveImages('versova-drive01/slide-images', 1).then(imageNames => {
+    initializeDriveGallery({
+      directory: 'versova-drive01/slide-images',
+      imageNames,
+      trackId: 'galleryTrack',
+      previousButtonId: 'galleryPrev',
+      nextButtonId: 'galleryNext',
+      label: 'Versova Beach clean-up'
+    });
+  });
+  initializeDriveGallery({
+    directory: 'versova-drive02/slide-images',
+    imageNames: ['0.1.jpeg', '0.jpeg', '1.jpeg', '2.jpeg', '3.jpeg', '4.jpeg', '5.jpeg', '6.jpeg', '7.jpeg', '8.jpeg', '9.jpeg', '10.jpeg', '11.jpeg'],
+    trackId: 'galleryTrack02',
+    previousButtonId: 'galleryPrev02',
+    nextButtonId: 'galleryNext02',
+    label: 'Versova Drive 02 clean-up'
+  });
   initializeCertificateSearch();
 });
 
-const driveImages = {};
-const driveImageDirectory = 'versova-drive01/slide-images';
 const supportedImageExtensions = ['jpeg', 'jpg', 'png', 'webp'];
 
 function imageExists(imagePath) {
@@ -41,12 +56,14 @@ function imageExists(imagePath) {
   });
 }
 
-async function discoverDriveImages() {
-  for (let imageNumber = 1; imageNumber <= 200; imageNumber += 1) {
+async function discoverDriveImages(directory, firstImageNumber) {
+  const imageNames = [];
+
+  for (let imageNumber = firstImageNumber; imageNumber <= 200; imageNumber += 1) {
     let imagePath = null;
 
     for (const extension of supportedImageExtensions) {
-      const candidatePath = `${driveImageDirectory}/${imageNumber}.${extension}`;
+      const candidatePath = `${directory}/${imageNumber}.${extension}`;
       if (await imageExists(candidatePath)) {
         imagePath = `${imageNumber}.${extension}`;
         break;
@@ -54,27 +71,28 @@ async function discoverDriveImages() {
     }
 
     if (!imagePath) break;
-    driveImages[`photo${String(imageNumber).padStart(2, '0')}`] = imagePath;
+    imageNames.push(imagePath);
   }
+
+  return imageNames;
 }
 
-function initializeDriveGallery() {
-  const track = document.getElementById('galleryTrack');
-  const previousButton = document.getElementById('galleryPrev');
-  const nextButton = document.getElementById('galleryNext');
+function initializeDriveGallery({ directory, imageNames, trackId, previousButtonId, nextButtonId, label }) {
+  const track = document.getElementById(trackId);
+  const previousButton = document.getElementById(previousButtonId);
+  const nextButton = document.getElementById(nextButtonId);
 
   if (!track || !previousButton || !nextButton) return;
 
-  const imagePath = imageName => `${driveImageDirectory}/${imageName}`;
-  const imageNames = Object.values(driveImages);
+  const imagePath = imageName => `${directory}/${imageName}`;
   let currentImage = 0;
 
   if (!imageNames.length) return;
 
   track.innerHTML = `
     <figure class="gallery-slide">
-      <img class="gallery-image is-active" src="${imagePath(imageNames[0])}" alt="Versova Beach clean-up moment 1">
-      <img class="gallery-image" src="${imagePath(imageNames[1] || imageNames[0])}" alt="Versova Beach clean-up moment 2" aria-hidden="true">
+      <img class="gallery-image is-active" src="${imagePath(imageNames[0])}" alt="${label} moment 1">
+      <img class="gallery-image" src="${imagePath(imageNames[1] || imageNames[0])}" alt="${label} moment 2" aria-hidden="true">
       <figcaption>01 / ${String(imageNames.length).padStart(2, '0')}</figcaption>
     </figure>
   `;
@@ -97,7 +115,7 @@ function initializeDriveGallery() {
     const preload = new Image();
     preload.onload = () => {
       nextImage.src = preload.src;
-      nextImage.alt = `Versova Beach clean-up moment ${nextImageIndex + 1}`;
+      nextImage.alt = `${label} moment ${nextImageIndex + 1}`;
       nextImage.classList.add('is-active');
       activeImage.classList.remove('is-active');
       nextImage.dataset.loading = 'false';
@@ -165,9 +183,14 @@ function showToast(message) {
   }, 4000);
 }
 
-// Certificate Search Functionality
-const certificateDirectory = 'versova-drive01/certificates';
-const certificateFiles = [
+// Shared certificate search across every completed drive.
+const certificateDrives = [
+  {
+    number: '01',
+    name: 'Versova Beach Clean-up Drive',
+    date: '06 September 2026',
+    directory: 'versova-drive01/certificates',
+    files: [
   'AAMIR KHAN.jpg',
   'AAYUSH PEDNEKAR.jpg',
   'ABHISHEK CHOUDHARY.jpg',
@@ -217,7 +240,100 @@ const certificateFiles = [
   'VAIBHAV SINGH.jpg',
   'VIGHNESH NAKATE.jpg',
   'VINIT VERMA.jpg',
-  'YASHRAJ DESHMUKH.jpg'
+      'YASHRAJ DESHMUKH.jpg'
+    ]
+  },
+  {
+    number: '02',
+    name: 'Post-Ganpati Versova Beach Clean-up',
+    date: '04 October 2026',
+    directory: 'versova-drive02/certificates',
+    files: [
+      'AADESH TIWARI.jpg',
+      'ABHISHEK PANDEY.jpg',
+      'AKHIL SINGH.jpg',
+      'AKSHATA BHATKAR.jpg',
+      'ANURAG PRAJAPATI.jpg',
+      'ARYAN KENI.jpg',
+      'ASHMIR SHAIKH.jpg',
+      'ATHARVA SAWARDEKAR.jpg',
+      'AVISHKAR JADHAV.jpg',
+      'BIGNESH RAWAL.jpg',
+      'BINDHYA KARKERA.jpg',
+      'CHAITANNYA KHOT.jpg',
+      'DANISH SHAH.jpg',
+      'DEBARGHAYA MAJUMDER.jpg',
+      'DHAIRYA KAMBLE.jpg',
+      'DHANASHREE SHELKE.jpg',
+      'DHRUV KHATRI.jpg',
+      'GAURAV SAVARATKAR.jpg',
+      'HARSHDEEP SINGH.jpg',
+      'HITESH BHARDA.jpg',
+      'JAY PATIL.jpg',
+      'JITENDRA SINGH.jpg',
+      'KAUSHIK LOKARE.jpg',
+      'KEVEN SHARON.jpg',
+      'KUSH MODHA.jpg',
+      'LAXMAN INGLE.jpg',
+      'MANAN DOSHI.jpg',
+      'MANTHAN VILANKAR.jpg',
+      'MEET SANWADKAR.jpg',
+      'MONALI SAWANT.jpg',
+      'NITHIN GELLE.jpg',
+      'OMKAR DHEMBRE.jpg',
+      'OMKAR PRABHU.jpg',
+      'PARAM BHOSLE.jpg',
+      'PRANAV KAMBLE.jpg',
+      'PRANIT LAD.jpg',
+      'PRIYASHA PATIL.jpg',
+      'RAGHAV PITHADIA.jpg',
+      'RASHMI PATIL.jpg',
+      'RHUTVIK KADAM.jpg',
+      'RIA GAWDE.jpg',
+      'RITU SURYAWANSHI.jpg',
+      'RUCHIKA SURVE.jpg',
+      'SAHIL HAWALDAR.jpg',
+      'SAHIL PATIL.jpg',
+      'SAHIL RANE.jpg',
+      'SAI NEWALKAR.jpg',
+      'SAKSHI PATIL.jpg',
+      'SAKSHI SONDKAR.jpg',
+      'SANDESH PANMAND.jpg',
+      'SARASWATI ORAON.jpg',
+      'SHRAVAN MASKAR.jpg',
+      'SHRAVANI KHOLE.jpg',
+      'SHRAVANI PATIL.jpg',
+      'SHREYA SONAWANE.jpg',
+      'SHREYASH PAIKRAO.jpg',
+      'SHRUTI SARVADE.jpg',
+      'SHUBHAM KADAM.jpg',
+      'SIDDHARTH KADAM.jpg',
+      'SIDDHI ANDHARE.jpg',
+      'SNEHA SHINDE.jpg',
+      'SNEHIL KAMBLE.jpg',
+      'SOHAM BAPAT.jpg',
+      'SOHAN CHAUDHARY.jpg',
+      'SOHAN PATIL.jpg',
+      'SOUMYA SHETTY.jpg',
+      'SRAWANI BELDAR.jpg',
+      'SRUSHTI LANDE.jpg',
+      'SUMAN PANIGRAHY.jpg',
+      'SUMIT DUBEY.jpg',
+      'SURAJ KONDEKAR.jpg',
+      'TANUJA PATIL.jpg',
+      'TANVI RAJDEO.jpg',
+      'THUSHAR POOJARY.jpg',
+      'TRIVENI KATKAR.jpg',
+      'TWINKLE SHARMA.jpg',
+      'VAIDEHI SATHE.jpg',
+      'VAISHNAVI BHAKAD.jpg',
+      'VED KADAM.jpg',
+      'VIGHNESH NAKATE.jpg',
+      'VINT VERMA.jpg',
+      'YASH DUBAL.jpg',
+      'YASHRAJ DESHMUKH.jpg'
+    ]
+  }
 ];
 
 function initializeCertificateSearch() {
@@ -257,15 +373,10 @@ function performCertificateSearch() {
     return;
   }
 
-  // Create regex pattern from search term (case insensitive)
-  const regexPattern = searchTerm.split('').join('.*').toUpperCase();
-  const regex = new RegExp(regexPattern);
-
-  // Find matching certificates
-  const matches = certificateFiles.filter(file => {
-    const fileName = file.replace('.jpg', '').toUpperCase();
-    return regex.test(fileName);
-  });
+  const normalizedSearchTerm = searchTerm.toUpperCase().replace(/\s+/g, ' ');
+  const matches = certificateDrives.flatMap(drive => drive.files
+    .filter(file => file.replace(/\.[^.]+$/, '').toUpperCase().includes(normalizedSearchTerm))
+    .map(file => ({ ...drive, file })));
 
   displayCertificateResults(matches);
 }
@@ -287,17 +398,22 @@ function displayCertificateResults(matches) {
     return;
   }
 
-  matches.forEach(fileName => {
+  matches.forEach(({ number, date, directory, file }) => {
     const clone = template.content.cloneNode(true);
     const resultItem = clone.querySelector('.certificate-result-item');
     const nameElement = clone.querySelector('.certificate-result-name');
+    const detailsElement = clone.querySelector('.certificate-result-text');
+    const viewBtn = clone.querySelector('.certificate-view-btn');
     const downloadBtn = clone.querySelector('.certificate-download-btn');
 
-    if (resultItem && nameElement && downloadBtn) {
-      const displayName = fileName.replace('.jpg', '');
+    if (resultItem && nameElement && detailsElement && viewBtn && downloadBtn) {
+      const displayName = file.replace(/\.[^.]+$/, '');
+      const certificateUrl = `${directory}/${encodeURIComponent(file)}`;
       nameElement.textContent = displayName;
-      downloadBtn.href = `${certificateDirectory}/${encodeURIComponent(fileName)}`;
-      downloadBtn.download = fileName;
+      detailsElement.textContent = `Drive ${number} · ${date.replace('September', 'Sep').replace('October', 'Oct')}`;
+      viewBtn.href = certificateUrl;
+      downloadBtn.href = certificateUrl;
+      downloadBtn.download = file;
     }
 
     resultsContainer.appendChild(clone);
